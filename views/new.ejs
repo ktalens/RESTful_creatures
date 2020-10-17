@@ -1,0 +1,22 @@
+<h1> Add a New Dino </h1>
+
+<form action="/dinosaurs" method="POST">
+    <label for="dinosaurType">Type: </label>
+    <input type="text" name="type" id="dinosaurType">
+    <br><br>
+    <label for="dinosaurName">Name: </label>
+    <input type="text" name="name" id="dinosaurName">
+    <br><br>
+    <input type="submit">
+</form>
+
+<!-- In a form, the METHOD attribute and the ACTION attribute tell the app WHICH route to send the form data to once the form has been submitted. Method <==> the HTTP verb (GET OR POST), and ACTION<==>the URL pattern for the route that we've written to deal with the form data (aka payload)
+    
+    method: HTTP verb - GET or POST. You will use POST most often because it is significantly more secure. Read about the difference between these two methods by scrolling down to the "When to Use GET" AND "When to Use Post" sections of this page.
+
+    action: This value should be a path. Specifically, it is the url pattern associated with the route that will handle the data - in this case, that will be the /dinosaurs POST route we will write. 
+
+    name: the name will create the key-name of what the post-object will be when the form is submitted (and the value inside the form will be the value)
+
+We do this because putting it in the method prevents us from exposing data to hacking-->
+
