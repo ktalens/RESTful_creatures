@@ -53,12 +53,41 @@ app.post('/dinosaurs',(req,res)=>{
 //writeFileSync is taking in JSON data with the stringify function (JSON string to string)
 
 // ----> PREHISTORIC CREATURES INDEX ROUTE <----
-app.get('/dinosaurs',(req,res)=>{
-    let dinosaurs = fs.readFileSync('./dinosaurs.json') //takes the json file and reads it as a string
-    let dinoData= JSON.parse(dinosaurs) //turns the string JSON as readable object we can use with EJS... aka converts the string into an array
-    res.render('index',{dinosaurs: dinoData})
+// const prehistoricCreat = require('./controllers/prehistoric_creatures')
+// app.use('/prehistoric_creatures',prehistoricCreat)
+
+app.get('/prehistoric_creatures',(req,res)=>{
+     let preCreatures= fs.readFileSync('./prehistoric_creatures.json')
+     let preData= JSON.parse(preCreatures)
+
+    res.render('prehistoric_creatures/index.ejs',{preCreatures: preData})
+})
+
+// ----> PREHISTORIC CREATURES CREATE NEW ROUTE <----
+app.get('/prehistoric_creatures/new', (req,res)=>{
+    res.render('prehistoric_creatures/new')
+})
+
+// ----> PREHISTORIC CREATURES POST ROUTE <----
+app.post('/prehistoric_creatures',(req,res)=>{
+    let preCreatures = fs.readFileSync('./prehistoric_creatures.json')
+    let preData= JSON.parse(preCreatures) 
+    preData.push(req.body)
+    fs.writeFileSync('./prehistoric_creatures.json',JSON.stringify(preData))
+    res.redirect('/prehistoric_creatures')
+})
+
+// ----> PREHISTORIC CREATURES SHOW ROUTE <----
+app.get('/prehistoric_creatures/:idx',(req,res)=>{
+    let preCreatures = fs.readFileSync('./prehistoric_creatures.json')
+    let preData= JSON.parse(preCreatures) 
+    let preIndex = req.params.idx 
+    res.render('prehistoric_creatures/show',{preCreat: preData[preIndex], preId: preIndex})
 
 })
+
+
+
 
 app.listen(8000,()=>{
     console.log('port 8000 is working')
